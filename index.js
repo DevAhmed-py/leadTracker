@@ -32,10 +32,12 @@ const tabs = [
 ]
 
 tabBtn.addEventListener("clicks", function() {
-    myLeads.push(tabs[0].url)
-    localStorage.setItem("myLeads", JSON.stringify(myLeads))
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        myLeads.push(tabs[0].url)
+        localStorage.setItem("myLeads", JSON.stringify(myLeads))
 
-    render(myLeads)
+        render(myLeads)
+    })
 })
 
 inputBtn.addEventListener("click", function() {
